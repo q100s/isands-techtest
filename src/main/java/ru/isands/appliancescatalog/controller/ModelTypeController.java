@@ -23,7 +23,7 @@ public class ModelTypeController {
             description = "Endpoint to add a new model type associated with a device type",
             parameters = {
                     @Parameter(
-                            name = "deviceTypeId",
+                            name = "id",
                             description = "Identifier for the device type",
                             required = true,
                             example = "1",
@@ -57,8 +57,8 @@ public class ModelTypeController {
             }
     )
     @PostMapping("/by-device-type/{id}")
-    public ModelTypeDto addNewModelType(@PathVariable Integer deviceTypeId,
+    public ModelTypeDto addNewModelType(@PathVariable Integer id,
                                         @RequestBody CreateModelTypeDto newProperties) {
-        return service.createNewModelTypeByDeviceTypeId(deviceTypeId, newProperties);
+        return service.createNewModelTypeByDeviceTypeId(id, newProperties);
     }
 }

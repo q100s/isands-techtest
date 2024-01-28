@@ -137,7 +137,7 @@ public class ModelController {
             description = "Endpoint to retrieve models filtered by device type ID",
             parameters = {
                     @Parameter(
-                            name = "deviceTypeId",
+                            name = "id",
                             description = "Identifier for the device type",
                             required = true,
                             example = "1",
@@ -160,16 +160,12 @@ public class ModelController {
                     @ApiResponse(
                             responseCode = "404",
                             description = "The device type has not found by identifier"
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "The device type has not found by identifier"
                     )
             }
     )
     @GetMapping("/filtered/by-device-type-{id}")
-    public List<ModelDto> getAllFilteredByDeviceTypeId(@PathVariable Integer deviceTypeId) {
-        return service.filterByDeviceTypeId(deviceTypeId);
+    public List<ModelDto> getAllFilteredByDeviceTypeId(@PathVariable Integer id) {
+        return service.filterByDeviceTypeId(id);
     }
 
     @Operation(
@@ -212,14 +208,14 @@ public class ModelController {
                             name = "minPrice",
                             description = "Minimum price for filtering",
                             required = true,
-                            example = "100_000",
+                            example = "10000",
                             schema = @Schema(type = "integer")
                     ),
                     @Parameter(
                             name = "maxPrice",
                             description = "Maximum price for filtering",
                             required = true,
-                            example = "500_000",
+                            example = "100000",
                             schema = @Schema(type = "integer")
                     )
             },
@@ -249,7 +245,7 @@ public class ModelController {
             description = "Endpoint to retrieve models filtered by device type ID and models specific criteria",
             parameters = {
                     @Parameter(
-                            name = "deviceTypeId",
+                            name = "id",
                             description = "Identifier for the device type",
                             required = true,
                             example = "1",
@@ -282,22 +278,14 @@ public class ModelController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Bad request or invalid data"
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "The device type has not found by identifier"
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "The device type has not found by identifier"
                     )
             }
     )
     @GetMapping("filtered/by-device-type-{id}-and-specs")
-    public List<ModelDto> getAllFilteredByDeviceTypeIdAndSpecs(@PathVariable Integer deviceTypeId,
+    public List<ModelDto> getAllFilteredByDeviceTypeIdAndSpecs(@PathVariable Integer id,
                                                                @RequestParam String specName,
                                                                @RequestParam String specValue) {
-        return service.filterByDeviceTypeIdAndSpecs(deviceTypeId, specName, specValue);
+        return service.filterByDeviceTypeIdAndSpecs(id, specName, specValue);
     }
 
     @Operation(
@@ -305,7 +293,7 @@ public class ModelController {
             description = "Endpoint to add a new model associated with a model type",
             parameters = {
                     @Parameter(
-                            name = "deviceTypeId",
+                            name = "id",
                             description = "Identifier for the model type",
                             required = true,
                             example = "1",
@@ -339,7 +327,7 @@ public class ModelController {
             }
     )
     @PostMapping("/by-model-type/{id}")
-    public ModelDto addNewModel(@PathVariable Integer deviceTypeId, @RequestBody CreateModelDto newProperties) {
-        return service.createNewModelByModelTypeId(deviceTypeId, newProperties);
+    public ModelDto addNewModel(@PathVariable Integer id, @RequestBody CreateModelDto newProperties) {
+        return service.createNewModelByModelTypeId(id, newProperties);
     }
 }
